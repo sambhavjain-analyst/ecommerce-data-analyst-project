@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ecommerce_Sales_Analysis_Report.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="ecommerce-sales-analysis-project">Ecommerce Sales Analysis Project</h1>
+<h2 id="1-project-overview">1. Project Overview</h2>
+<p>This project analyzes e-commerce sales data to understand sales performance, profitability, customer behavior, product performance, and order trends. Python, Pandas, MySQL, and Power BI were used to clean, analyze, query, and visualize the data.</p>
+<h2 id="2-project-objectives">2. Project Objectives</h2>
+<ul>
+<li>Analyze total sales, profit, and profit margin.</li>
+<li>Identify the most profitable product categories and products.</li>
+<li>Understand monthly sales trends.</li>
+<li>Analyze payment methods, shipping modes, and customer types.</li>
+<li>Evaluate product returns and discount impact.</li>
+<li>Build an interactive Power BI dashboard for business decision-making.</li>
+</ul>
+<h2 id="3-tools-and-technologies">3. Tools and Technologies</h2>
+<ul>
+<li><strong>Python:</strong> Data cleaning and exploratory data analysis.</li>
+<li><strong>Pandas:</strong> Data manipulation and analysis.</li>
+<li><strong>Jupyter Notebook:</strong> Executing Python analysis.</li>
+<li><strong>MySQL:</strong> Database storage and SQL queries.</li>
+<li><strong>Power BI Desktop:</strong> Interactive dashboard and visualizations.</li>
+<li><strong>CSV:</strong> Dataset storage and data transfer.</li>
+</ul>
+<h2 id="4-dataset-description">4. Dataset Description</h2>
+<p>The cleaned dataset contains 10,000 rows and 26 columns. It includes information related to orders, sales, profit, products, categories, customers, payment methods, shipping modes, discounts, marketing channels, and returns.</p>
+<h2 id="5-data-cleaning">5. Data Cleaning</h2>
+<p>Data cleaning was performed using Python and Pandas.</p>
+<ul>
+<li>Checked and handled missing values.</li>
+<li>Filled missing ratings using the median rating.</li>
+<li>Replaced missing marketing channel values with &quot;Unknown&quot;.</li>
+<li>Removed 20 duplicate records.</li>
+<li>Converted the order date column to datetime format.</li>
+<li>Created Year and Month columns for time-based analysis.</li>
+<li>Exported the cleaned dataset to a CSV file.</li>
+</ul>
+<h2 id="6-exploratory-data-analysis">6. Exploratory Data Analysis</h2>
+<p>Exploratory data analysis was conducted to identify patterns in sales and profitability.</p>
+<p>The analysis covered:</p>
+<ul>
+<li>Overall sales and profit.</li>
+<li>Category-wise performance.</li>
+<li>Monthly sales and profit trends.</li>
+<li>Payment methods and shipping modes.</li>
+<li>New and returning customers.</li>
+<li>Product returns.</li>
+<li>Marketing channel performance.</li>
+<li>Customer demographics.</li>
+<li>Discount levels and profitability.</li>
+<li>Relationships between numerical variables.</li>
+</ul>
+<h2 id="7-sql-analysis">7. SQL Analysis</h2>
+<p>The cleaned data was imported into the MySQL database <code>ecommerce_analysis</code>, in the <code>sales</code> table.</p>
+<p>SQL analysis included:</p>
+<ul>
+<li>Aggregate functions for total sales, profit, and orders.</li>
+<li>Category-wise sales and profit analysis.</li>
+<li>Top products ranked by sales and profit.</li>
+<li>Common Table Expressions (CTEs).</li>
+<li>Window functions such as RANK() and LAG().</li>
+<li>CASE statements for profit margin classification.</li>
+<li>Month-over-month sales growth.</li>
+<li>Customer revenue and repeat-customer analysis.</li>
+</ul>
+<h2 id="8-power-bi-dashboard">8. Power BI Dashboard</h2>
+<p>An interactive Power BI dashboard was developed to visualize key performance indicators and business trends.</p>
+<p>The dashboard includes:</p>
+<ul>
+<li>Total Sales.</li>
+<li>Total Profit.</li>
+<li>Profit Margin.</li>
+<li>Total Orders.</li>
+<li>Monthly Sales Trend.</li>
+<li>Sales and Profit by Category.</li>
+<li>Orders by Payment Method.</li>
+<li>Orders by Shipping Mode.</li>
+<li>Orders by Customer Type.</li>
+<li>Orders by Return Status.</li>
+<li>Top 10 Products by Profit.</li>
+</ul>
+<p>Interactive slicers allow users to filter the dashboard by Category, Customer Type, and City.</p>
+<h2 id="9-key-business-insights">9. Key Business Insights</h2>
+<ol>
+<li><strong>Overall sales:</strong> Approximately ₹15.99 crore.</li>
+<li><strong>Overall profit:</strong> Approximately ₹2.70 crore.</li>
+<li><strong>Profit margin:</strong> Approximately 16.87%.</li>
+<li><strong>Total orders:</strong> 10,000.</li>
+<li><strong>Category performance:</strong> Electronics generated the highest total profit, approximately ₹1.64 crore.</li>
+<li><strong>Profit margin:</strong> Sports had the highest category-level profit margin, approximately 18.30%.</li>
+<li><strong>Sales trend:</strong> July recorded the highest monthly sales, while November recorded the lowest.</li>
+<li><strong>Payment preference:</strong> UPI was the most frequently used payment method, with 3,931 orders.</li>
+<li><strong>Returns:</strong> 878 orders were marked as returned, representing an 8.78% return rate.</li>
+<li><strong>Discount impact:</strong> Orders with a 30% discount had a negative total profit of approximately ₹1.4 lakh.</li>
+</ol>
+<h2 id="10-business-recommendations">10. Business Recommendations</h2>
+<ul>
+<li>Focus on maintaining Electronics performance while exploring growth opportunities in other categories.</li>
+<li>Study successful Sports category margins to identify practices that could improve profitability elsewhere.</li>
+<li>Investigate the November sales decline and develop targeted promotional campaigns.</li>
+<li>Review high-discount orders to prevent discounts from reducing profitability.</li>
+<li>Analyze returned orders to identify product, quality, or delivery issues.</li>
+<li>Continue evaluating UPI adoption and customer purchasing behavior.</li>
+<li>Use the interactive dashboard to monitor KPIs and support regular business reviews.</li>
+</ul>
+<h2 id="11-conclusion">11. Conclusion</h2>
+<p>This project demonstrates an end-to-end data analysis workflow, from data cleaning and exploratory analysis to SQL-based investigation and interactive dashboard development. The findings provide insights into revenue, profitability, customer behavior, returns, and discount effectiveness.</p>
+<p>The project also demonstrates practical skills in Python, Pandas, MySQL, SQL analytics, and Power BI.</p>
+<h2 id="12-project-files">12. Project Files</h2>
+<p>The project is organized into the following folders and files:</p>
+<ul>
+<li><strong>Raw Dataset:</strong> <code>data/ecommerce_sales_raw.csv</code></li>
+<li><strong>Cleaned Dataset:</strong> <code>data/ecommerce_sales_cleaned.csv</code></li>
+<li><strong>Python Data Cleaning Notebook:</strong> <code>notebooks/01_Data_Cleaning.ipynb</code></li>
+<li><strong>SQL Analysis File:</strong> <code>data/e commerce sql.sql</code></li>
+<li><strong>Power BI Dashboard:</strong> <code>dashboard/ECOMMERCE SALES &amp; PROFIT ANALYTICS.pbix</code></li>
+<li><strong>Final Project Report:</strong> <code>report/Ecommerce_Sales_Analysis_Report.md</code></li>
+</ul>
+<p>These files contain the datasets, data cleaning workflow, SQL queries, interactive dashboard, and project documentation.</p>
+
+</body>
+</html>
